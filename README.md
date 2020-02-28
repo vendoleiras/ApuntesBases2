@@ -82,3 +82,41 @@ Ejemplo:
 DELETE FROM world
 
 WHERE population > 100000000;
+
+---
+
+Numeros (pg)
+
+- integer
+
+- decimal (preciso)
+
+- real (non preciso)
+
+TEXTO pode ser 'char' | 'varchar' | 'text'
+
+- char -> ten lonxitude fixa | char(10) un dni ten que ter tantos caracteres non é algo variable.
+
+- varchar -> lonxitude variable | varchar(20) 
+
+- text -> non podes por limite de tamaño, e ocupa moito espacio
+
+---
+
+TEMPO hai 'date' | 'time' | 'timestamp'
+
+- date -> dia, mes, ano
+
+- time -> hora, minutos, segundos... [zona_horaria]
+
+- timestamp -> date + time
+
+---
+
+OTROS -> 'boolean' | 'money' | 'json' | 'cidr' | 'uuid' | 'inet'
+
+- boolean -> true (1) | false (0) |||| NULL -> NOT NULL
+
+- money -> para os dineros
+
+- json -> actualmente usase esto, en bancos e administracion publica usase xml
