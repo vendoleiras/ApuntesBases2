@@ -120,3 +120,9 @@ OTROS -> 'boolean' | 'money' | 'json' | 'cidr' | 'uuid' | 'inet'
 - money -> para os dineros
 
 - json -> actualmente usase esto, en bancos e administracion publica usase xml
+
+
+---
+
+CASCADE usase no 90% dos casos, as modificacións van ser casi siempre cascada
+DEFAULT usábase hai moito tempo, agora apenas nada, é falsear información
