@@ -126,3 +126,107 @@ OTROS -> 'boolean' | 'money' | 'json' | 'cidr' | 'uuid' | 'inet'
 
 CASCADE usase no 90% dos casos, as modificacións van ser casi siempre cascada
 DEFAULT usábase hai moito tempo, agora apenas nada, é falsear información
+
+---
+
+Para crear un dominio
+CREATE DOMAIN Tipo_DNI CHAR(9);
+CREATE DOMAIN Tipo_Código CHAR(5);
+CREATE DOMAIN Nome_Válido CHAR(30); Neste é mellor usar VARCHAR
+
+Esto non é obligatorio usalo no exame pero é moito máis cómodo
+
+---
+
+CREATE TABLE Investigación.Sede (
+	Nome_Sede Nome_Válido PRIMARY KEY,  >así non deberíamos por unha primary key
+	Campus    Nome_Válido NOT NULL,
+);
+
+Facelo así mellor
+
+CREATE TABLE Investigación.Sede (
+	Nome_Sede Nome_Válido,
+	Campus    Nome_Válido NOT NULL,
+	CONSTRAINT PC_Sede
+		PRIMARY KEY (Nome_Sede)
+);
+
+Si non leva asterisco tes que por NOT NULL
+
+CREATE TABLE Investigación.Departamento (
+	Nome_Departamento Nome_Válido PRIMARY KEY, --- si é simple podes por eiqui o PRIMARY KEY igual que no anterior
+	Teléfono          CHAR(9) NOT NULL,
+	Director          Tipo_DNI,
+ 
+ Eiqui por exemplo non podrías por PRIMARY KEY en cada un, MOTIVO DE SUSPENSO
+ 
+ CREATE TABLE Investigación.Ubicación (
+	Nome_Sede		  Nome_Válido,
+	Nome_Departamento Nome_Válido,
+	PRIMARY KEY (Nome_Sede, Nome_Departamento)
+ 
+ De cara ao exame é mellor usar ALTER TABLE pero miramos todos os exemplos
+ 
+ CREATE TABLE Investigación.Ubicación (
+	Nome_Sede		  Nome_Válido,
+	Nome_Departamento Nome_Válido,
+	PRIMARY KEY (Nome_Sede, Nome_Departamento),
+	CONSTRAINT FK_Sede_Ubicación
+		FOREIGN KEY (Nome_Sede)
+		  REFERENCES Investigación.Sede (Nome_Sede)
+		  ON DELETE CASCADE
+		  ON UPDATE CASCADE,
+	CONSTRAINT FK_Departamento_Ubicación
+		FOREIGN KEY (Nome_Departamento)
+		  REFERENCES Investigación.Departamento (Nome_Departamento)
+		  ON DELETE CASCADE
+		  ON UPDATE CASCADE
+);
+
+CREATE TABLE Investigacion.Grupo (
+	Nome_Grupo         Nome_Válido,
+	Nome_Departamento  Nome_Válido,
+	Área			   Nome_Válido NOT NULL,
+	Lider			   Tipo_DNI,
+	PRIMARY KEY (Nome_Grupo, Nome_Departamento),
+	FOREIGN KEY (Nome_Departamento)
+	  REFERENCES Investigación.Departamento (Nome_Departamento)
+	  ON DELETE CASCADE
+	  ON UPDATE CASCADE
+	-- FK (Lider)
+);
+
+CREATE TABLE Investigación.Profesor (
+	DNI            Tipo_DNI PRIMARY KEY,
+	Nome_Profesor  Nome_Válido NOT NULL,
+	Titulación     VARCHAR(29) NOT NULL,
+	Experiencia    Integer,
+	N_Grupo        Nome_Válido,
+	N_Departamento Nome_Válido,
+	FOREIGN KEY (N_Grupo, N_Departamento)
+	  REFERENCES Investigación.Grupo (N_Grupo, N_Departamento)
+	  ON DELETE SET NULL
+	  ON UPDATE CASCADE
+);
+
+ALTER TABLE Investigacion.Departamento
+	ADD CONSTRAINT FK_Profesor_Departamento
+		FOREIGN KEY (Director)
+			REFERENCES Profesor (DNI)
+			ON DELETE SET NULL
+				ON UPDATE CASCADE;
+		
+--- a foreign key de profesor tá mal . facer unha nova
+--- foreign key con B:N M:R
+
+ALTER TABLE Investigación.Profesor
+	DROP CONSTRAINT FK_Grupo_Profesor;
+	
+ALTER TABLE Profesor
+	ADD CONSTRAINT FK_Grupo_Profesor
+	FOREIGN KEY (N_Grupo, N_Departamento)
+		REFERENCES Grupo (Nome_Grupo, Nome_Departamento)
+		ON DELETE SET NULL
+		ON UPDATE NO ACTION;
+	
