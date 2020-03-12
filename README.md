@@ -229,4 +229,26 @@ ALTER TABLE Profesor
 		REFERENCES Grupo (Nome_Grupo, Nome_Departamento)
 		ON DELETE SET NULL
 		ON UPDATE NO ACTION;
+		
+---
 	
+https://gist.github.com/vendoleiras/47aef6ef2215483ed434fb9cf2af71d4/edit
+
+---
+
+Claves alternativas irían en negrita pero el "rectanguleao"
+UNIQUE e CHECK tamén podes usalo con ALTER TABLE
+
+ALTER TABLE Financia
+    DROP COLUMN Cantidade_Financiada;
+
+ALTER TABLE Financia
+    ADD COLUMN Cantidade_Financiada MONEY NOT NULL;
+    
+Esto en caso de que nos equivocáramos o meter o tipo de datos
+
+DENTRO DUN CHECK TEN QUE IR ALGO QUE DEVOLVA CERTO OU FALSO
+
+---
+ON DELETE E UPDATE HAI QUE FACELOS SI OU SI
+
