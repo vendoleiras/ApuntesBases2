@@ -1,27 +1,27 @@
 ﻿# Apuntes DDL e DML
 
 ## Índice
- - [Introducción a SQL](#introducción_a_sql)
- - [Sublenguajes SQL](#sublenguajes_sql)
+ - [Introducción a SQL](#introduccion1)
+ - [Sublenguajes SQL](#sublenguajes)
  - [DDL](#ddl)
-	 - [Introducción](#introducción_a_ddl)
+	 - [Introducción](#introduccion2)
 	 - [CREATE](#create)
 	 - [ALTER](#alter)
 	 - [DROP](#drop)
-	 - [Tipos de datos](#tipos_de_datos)
-	 - [Constraints o restricciones](#constraints_o_restricciones)
+	 - [Tipos de datos](#tipoDatos)
+	 - [Constraints o restricciones](#constraintsRestric)
 - [DML](#dml)
-	- [Introducción](#introducción_a_dml)
+	- [Introducción](#introduccion3)
 	- [INSERT](#insert)
 	- [UPDATE](#update)
 	- [DELETE](#delete)
 	- [SELECT](#select)
-## Introducción a SQL
+## Introducción a SQL <a name="introduccion1"></a>
 El lenguaje SQL es un lenguaje de dominio específico utilizado en programación, diseñado para administrar y recuperar información de sistemas de gestión de bases de datos relacionales y pudiéndose integrar a lenguajes de programación como PHP o ASP.
 Sus siglas (SQL) significan _**Structured Query Language**_.
 Se suele describir como un *lenguaje declarativo* ya que a la hora de programar declaras *que* quieres hacer y no *como* lo quieres hacer.
 ***
-## Sublenguajes SQL
+## Sublenguajes SQL <a name="sublenguajes"></a>
 
  - **DDL Data Definition Language.**
  
@@ -37,7 +37,7 @@ Se suele describir como un *lenguaje declarativo* ya que a la hora de programar 
 
 ## DDL
 
-### Introducción a DDL
+### Introducción a DDL <a name="introduccion2"></a>
 
 **DDL** son las iniciales de "Data Definition Language", o lo que es lo mismo, *lenguaje de definición de datos*. Sirve para crear, modificar e inclusor borrar la estructura de las tablas de la propia base de datos. Sus comandos principales son `ALTER`, `DROP` y `CREATE`.
 
@@ -108,7 +108,7 @@ DROP TABLE nombre_tabla
 >
 
 ---
-### Tipos de datos
+### Tipos de datos <a name="tipoDatos"></a>
 Los tipos de datos más usados para la información de la columna son:
 - **`INTEGER`**
 - **`DECIMAL`** (preciso)
@@ -126,7 +126,7 @@ Los tipos de datos más usados para la información de la columna son:
 - **`UUID`**
 - **`INET`**
 ---
-### Constraint o restricciones
+### Constraint o restricciones <a name="constraintsRestric"></a>
 Nos sirven para especificar reglas para los datos de la tabla. Se pueden usar justo después de definir el tipo de datos, pero esto solo se podría hacer en caso de que sean casos simples y no compuestos. La mejor opción es añadirlas al final, después de haber definido todos los datos. Los más usados son:
 - **`NOT NULL`** - De forma predeterminada una columna puede ser `NULL`, usamos `NOT NULL` si queremos evitar que esta columna lo sea.
 - **`PRIMARY KEY`** - Las claves primarias se usan para identificar cada fila como única. Puede consistir en una o varias columnas. Siempre tiene que ser `NOT NULL`. Pueden especificarse cuando se usa `CREATE TABLE` o cuando se use `ALTER TABLE`.
@@ -175,7 +175,7 @@ CREATE TABLE clase (
 
 ---
 ## DML
-### Introducción a DML
+### Introducción a DML <a name="introduccion3"></a>
 
 **DML** son las iniciales de "Data Manipulation Language", o lo que es lo mismo, *lenguaje de manipulación de datos*. Sirve para llevar a cabo las tareas de consulta o modificación de los datos contenidos en la propia base de datos. Sus comandos principales son `SELECT`, `INSERT`, `UPDATE` y `DELETE`.
 
